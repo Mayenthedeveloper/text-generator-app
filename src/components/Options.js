@@ -1,13 +1,24 @@
 import React from "react";
 
-function Options() {
+function Options(props) {
+  const {
+    includeHtml,
+    setIncludeHtml,
+    setInputValue,
+    copiedCode,
+    setCopiedCode,
+    paragraphs,
+    tag,
+    setTag,
+  };
+
   return (
     <div className="options">
       <div className="wrapper">
         <div className="optionsContainer">
           <div className="paragraphs">
             <p>Paragraphs:</p>
-            <input type="text" />
+            <input type="number" />
           </div>
           <div className="tag">
             <p>Tags:</p>
