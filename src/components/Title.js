@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Container from "./Container";
+import React from "react";
 
 function Title() {
   return (

@@ -1,4 +1,5 @@
 import React from "react";
+import CopyToCLipBoard from "copy-to-clipboard-react";
 
 function Options(props) {
   const {
@@ -10,7 +11,11 @@ function Options(props) {
     paragraphs,
     tag,
     setTag,
-  };
+  } = props;
+
+  setTimeout(() => {
+    setCopiedCode(false);
+  }, 3000);
 
   return (
     <div className="options">
@@ -18,11 +23,17 @@ function Options(props) {
         <div className="optionsContainer">
           <div className="paragraphs">
             <p>Paragraphs:</p>
-            <input type="number" />
+            <input
+              type="number"
+              min="1"
+              max="10"
+              defaultValue="1"
+              onChange={(e) => setInputValue(e.target.value)}
+            />
           </div>
           <div className="tag">
             <p>Tags:</p>
-            <select>
+            <select defaultValue={tag} onChange={(e) => setTag(e.target.value)}>
               <option value="p">&lt;p&gt;</option>
               <option value="h1">&lt;h1&gt;</option>
               <option value="h2">&lt;h2&gt;</option>
@@ -35,14 +46,24 @@ function Options(props) {
           </div>
           <div className="include">
             <p>Includes HTML:</p>
-            <select>
+            <select
+              defaultValue={includeHtml}
+              onChange={(e) => setIncludeHtml(e.target.value)}
+            >
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
           </div>
         </div>
         <div className="copy">
-          <p>Copy to clipboard</p>
+          <CopyToCLipBoard
+            text={paragraphs.map((sentence) =>
+              includeHtml === "Yes" ? `<${tag}> ${sentence}</${tag}>` : sentence
+            )}
+            onCopy={() => setCopiedCode(true)}
+          >
+            <button>{copiedCode ? "Copied" : "Copy to clipboard"}</button>
+          </CopyToCLipBoard>
         </div>
       </div>
     </div>
