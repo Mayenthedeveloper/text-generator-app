@@ -1,7 +1,7 @@
 import React from "react";
-import CopyToCLipBoard from "copy-to-clipboard-react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
-function Options(props) {
+const Options = (props) => {
   const {
     includeHtml,
     setIncludeHtml,
@@ -56,18 +56,18 @@ function Options(props) {
           </div>
         </div>
         <div className="copy">
-          <CopyToCLipBoard
+          <CopyToClipboard
             text={paragraphs.map((sentence) =>
               includeHtml === "Yes" ? `<${tag}> ${sentence}</${tag}>` : sentence
             )}
             onCopy={() => setCopiedCode(true)}
           >
             <button>{copiedCode ? "Copied" : "Copy to clipboard"}</button>
-          </CopyToCLipBoard>
+          </CopyToClipboard>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Options;
